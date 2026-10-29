@@ -8,6 +8,7 @@ namespace Rpg.ConsoleUI.Domain
     public class Player : Character
     {
         public int Ouro { get; private set; }
+        public Inventory Iventario  { get; } = new();
 
         public Player(string nome, int vidaMaxima, int ataque, int defesa, int ouro = 0) : base(nome, vidaMaxima, ataque, defesa) 
         {
