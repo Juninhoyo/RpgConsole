@@ -4,6 +4,11 @@ Player jogador = new Player(nome: "Ronald",vidaMaxima: 100,ataque: 8,defesa: 9,o
 Monster goblin = new Monster(nome: "Goblin",vidaMaxima: 30,ataque: 12,defesa: 3,recompensaOuro: 15,recompensaXp: 10);
 Weapon adaga = new Weapon(nome: "Adaga enferrujada",preco: 0,bonusAtaque: 100);
 
+goblin.AdicionarDrops(new Drop(new Weapon(nome: "Adaga de ossos", preco: 50, bonusAtaque: 5), chance: 0.30));
+goblin.AdicionarDrops(new Drop(new Weapon(nome: "Adaga de ossos 2", preco: 50, bonusAtaque: 5), chance: 0));
+goblin.AdicionarDrops(new Drop(new Weapon(nome: "Adaga de ossos 3", preco: 50, bonusAtaque: 5), chance: 1));
+
+
 jogador.Iventario.Adicionar(new Potion(nome:"Poção pequena",preco: 10,cura: 30));
 
 
@@ -34,9 +39,19 @@ if (!goblin.EstaVivo)
 {
     jogador.GanharOuro(goblin.RecompensaOuro);
     Console.WriteLine($"O {goblin.Nome} foi derrotado e foi dropado {goblin.RecompensaOuro} de ouro e de {goblin.RecompensaXp}.");
+    foreach(Item item in goblin.SortearDrops(Random.Shared))
+    {
+        jogador.Iventario.Adicionar(item);
+        Console.WriteLine($"Deixou cair: {item.Nome}");
+    }
 }
 
 Console.WriteLine($"Quantidade atual {jogador.Ouro}.");
+
+foreach(Item item in jogador.Iventario.Itens)
+{
+    Console.WriteLine($"- {item.Nome} (valor: {item.Preco})");
+}
 
 
 
