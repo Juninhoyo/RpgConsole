@@ -15,6 +15,7 @@ goblin.AdicionarDrops(new Drop(new Weapon(nome: "Adaga de ossos 3", preco: 50, b
 
 int turno = 1;
 bool fugiu = false;
+const double ChanceDeFuga = 0.5;
 
 Console.WriteLine($"Um {goblin.Nome} apareceu no seu caminho!");
 
@@ -71,8 +72,15 @@ while (jogador.EstaVivo && goblin.EstaVivo && !fugiu)
 
         case AcaoCombate.Fugir:
             {
-                fugiu = true;
-                Console.WriteLine($"{jogador.Nome} fugiu da batalha!");
+                if (Random.Shared.NextDouble() < ChanceDeFuga)
+                {
+                    fugiu = true;
+                    Console.WriteLine($"{jogador.Nome} fugiu da batalha!");    
+                }
+                else
+                {
+                    Console.WriteLine($"O {jogador.Nome} tenta fugir mas o {goblin.Nome} bloqueia o caminho");
+                }
                 break;
             }
         
