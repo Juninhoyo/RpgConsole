@@ -13,14 +13,14 @@ namespace Rpg.ConsoleUI.Domain
         {
             if(cura <= 0)
             {
-                throw new ArgumentException(nameof(cura),"A cura deve ser maior que zero");
+                throw new ArgumentException(nameof(cura),"A cura deve ser maior que zero.");
             }
             Cura = cura;
         }
 
-        public void UsarCura(Character alvo)
+        public int UsarCura(Character alvo)
         {
-            alvo.Curar(Cura);
+            return alvo.Curar(Cura);
         }
     }
 }

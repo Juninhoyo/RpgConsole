@@ -36,19 +36,29 @@ namespace Rpg.ConsoleUI.Domain
             Ataque = ataque;
             Defesa = defesa;
         }
-        public void ReceberDano(int forcaDoAtaque)
+        public int ReceberDano(int forcaDoAtaque)
         {
             int dano = Math.Max(0, forcaDoAtaque - Defesa);
+            int VidaAntes = Vida;
             Vida = Math.Max(0, Vida - dano);
+            return VidaAntes - Vida;
         }
 
-        public void Curar(int quantidade)
+        public int Curar(int quantidade)
         {
             if(quantidade <= 0)
             {
-                return;
+                return 0;
             }
+            int VidaAntes = Vida;
             Vida = Math.Min(VidaMaxima, Vida + quantidade);
+            return Vida - VidaAntes;
+        }
+
+        public int Atacar(Character alvo)
+        {
+            ArgumentNullException.ThrowIfNull(alvo);
+            return alvo.ReceberDano(Ataque);
         }
     }
 }
