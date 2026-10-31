@@ -17,7 +17,7 @@ namespace Rpg.ConsoleUI.Domain
         {
             if(RecompensaOuro < 0 || RecompensaXp < 0)
             {
-                throw new ArgumentException(nameof(RecompensaOuro),"As recompensas não podem ser negativas");
+                throw new ArgumentException(nameof(RecompensaOuro),"As recompensas não podem ser negativas.");
             }
             RecompensaOuro = recompensaOuro;
             RecompensaXp = recompensaXp;

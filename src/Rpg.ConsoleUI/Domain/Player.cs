@@ -8,13 +8,13 @@ namespace Rpg.ConsoleUI.Domain
     public class Player : Character
     {
         public int Ouro { get; private set; }
-        public Inventory Iventario  { get; } = new();
+        public Inventory Inventario  { get; } = new();
 
         public Player(string nome, int vidaMaxima, int ataque, int defesa, int ouro = 0) : base(nome, vidaMaxima, ataque, defesa) 
         {
             if(ouro < 0)
             {
-                throw new ArgumentException(nameof(ouro),"Ouro não podemser negativo.");
+                throw new ArgumentException(nameof(ouro),"Ouro não pode ser negativo.");
             }
 
             Ouro = ouro;
