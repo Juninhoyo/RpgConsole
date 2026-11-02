@@ -14,6 +14,9 @@ namespace Rpg.ConsoleUI.Domain
         public int Defesa { get; }
 
         public bool EstaVivo => Vida > 0;
+        public const double ChanceDeAcerto = 0.85;
+        public const double ChanceDeCritico = 0.15;
+        public const double MultiplicadorCritico = 2.5;
 
         public Character(string nome, int vidaMaxima, int ataque, int defesa)
         {
@@ -55,10 +58,18 @@ namespace Rpg.ConsoleUI.Domain
             return Vida - VidaAntes;
         }
 
-        public int Atacar(Character alvo)
+        public ResultadoAtaque Atacar(Character alvo, double sorteioAcerto, double sorteioCritico)
         {
             ArgumentNullException.ThrowIfNull(alvo);
-            return alvo.ReceberDano(Ataque);
+            bool acertou = sorteioAcerto < ChanceDeAcerto;
+            if (!acertou)
+            {
+                return new ResultadoAtaque(Acertou: false, Critico: false, Dano: 0);
+            }
+            bool critico = sorteioCritico < ChanceDeCritico;
+            int forca = critico ? (int)(Ataque * MultiplicadorCritico) : Ataque;
+            int dano = alvo.ReceberDano(forca);
+            return new ResultadoAtaque(Acertou: true, Critico: critico, Dano: dano);
         }
     }
 }

@@ -12,6 +12,13 @@ namespace Rpg.ConsoleUI
         Fugir,
         VerInventario
     }
+
+    public enum ResultadoAcao
+    {
+        GastouTurno,
+        NaoGastouTurno,
+        Fugiu
+    }
         
     public static class MenuCombate
     {
